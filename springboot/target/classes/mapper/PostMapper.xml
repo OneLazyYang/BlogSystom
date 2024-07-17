@@ -12,6 +12,7 @@
                 and user_id =#{params.userid}
             </if>
         </where>
+        order by created desc
     </select>
     <select id="findAll" resultType="com.example.entity.Post">
         select post.*,user.username AS username from post
