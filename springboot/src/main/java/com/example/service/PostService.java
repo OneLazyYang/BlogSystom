@@ -51,4 +51,8 @@ public class PostService {
         List<Post> list = postDao.findAll(params);
         return PageInfo.of(list);
     }
+
+    public Post findDetails(Integer id) {
+        return  postDao.selectByPrimaryKey(id);
+    }
 }

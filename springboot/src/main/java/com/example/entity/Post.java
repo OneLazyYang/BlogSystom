@@ -17,6 +17,8 @@ public class Post {
     private String created;
     @Column(name="last_modified")
     private String last_modified;
+    @Transient
+    private String username;
 
     public Integer getPost_id() {
         return post_id;
@@ -64,5 +66,13 @@ public class Post {
 
     public void setLast_modified(String last_modified) {
         this.last_modified = last_modified;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

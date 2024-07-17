@@ -17,7 +17,8 @@ public class User {
     private String created;
     @Column(name="last_modified")
     private String last_modified;
-
+    @Column(name="img")
+    private String img;
     @Transient
     private String token;
 
@@ -75,5 +76,13 @@ public class User {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 }

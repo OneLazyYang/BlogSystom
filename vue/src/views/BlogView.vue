@@ -12,11 +12,11 @@
         <el-table-column prop="username" label="作者"></el-table-column>
         <el-table-column prop="created" label="创建时间"></el-table-column>
         <el-table-column prop="last_modified" label="更新时间"></el-table-column>
-        <!-- <el-table-column label="操作">
+        <el-table-column label="操作">
           <template slot-scope="scope">
-            <el-button type="primary" @click="edit(scope.row)">编辑</el-button>
+            <el-button type="primary" @click="edit(scope.row.post_id)">详情</el-button>
           </template>
-        </el-table-column> -->
+        </el-table-column>
       </el-table>
     </div>
     <div style="text-align: center;margin-top: 10px">
@@ -30,8 +30,8 @@
           :total="total">
       </el-pagination>
     </div>
-    <!-- <div>
-      <el-dialog title="请填写信息" :visible.sync="dialogFormVisible" width="30%">
+    <div>
+      <el-dialog title="详细信息" :visible.sync="dialogFormVisible" width="30%">
         <el-form :model="form">
           <el-form-item label="标题" label-width="15%">
             <el-input v-model="form.title" autocomplete="off" style="width: 90%"></el-input>
@@ -39,13 +39,18 @@
           <el-form-item label="内容" label-width="15%">
             <el-input v-model="form.content" autocomplete="off" style="width: 90%"></el-input>
           </el-form-item>
+          <el-form-item label="发表时间" label-width="15%">
+            <el-input v-model="form.created" autocomplete="off" style="width: 90%"></el-input>
+          </el-form-item>
+          <el-form-item label="更新时间" label-width="15%">
+            <el-input v-model="form.last_modified" autocomplete="off" style="width: 90%"></el-input>
+          </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
-          <el-button @click="dialogFormVisible = false">取 消</el-button>
-          <el-button type="primary" @click="submit()">确 定</el-button>
+          <el-button @click="dialogFormVisible = false">确定</el-button>
         </div>
       </el-dialog>
-    </div> -->
+    </div>
   </div>
 </template>
 
@@ -60,7 +65,7 @@ export default {
         pageNum:1,
         pageSize:10
       },
-      // form:{},
+      form:{},
       tableData: [],
       total:0,
       dialogFormVisible:false,
@@ -71,8 +76,8 @@ export default {
   },
   methods:{
     findBySearch() {
-    request.get("/posts/all", {params: this.params}
-    ).then(res => {
+      request.get("/posts/all", {params: this.params}
+      ).then(res => {
         if (res.code === '0') {
           this.tableData = res.data.list;
           this.total = res.data.total;
@@ -92,27 +97,6 @@ export default {
       }
       this.findBySearch();
     },
-    // submit(){
-    //   request.post("/student/submit",this.form).then(res=>{
-    //     if(res.code==='0'){
-    //       this.$message({
-    //         message: '操作成功',
-    //         type: 'success'
-    //       });
-    //       this.dialogFormVisible = false;
-    //       this.findBySearch();
-    //     }else{
-    //       this.$message({
-    //         message: res.msg,
-    //         type: 'error'
-    //       });
-    //     }
-    //   })
-    // },
-    // edit(obj){
-    //   this.form=obj;
-    //   this.dialogFormVisible = true;
-    // },
     handleSizeChange(pageSize){
       this.params.pageSize = pageSize;
       this.findBySearch();
@@ -121,9 +105,19 @@ export default {
       this.params.pageNum = pageNum;
       this.findBySearch();
     },
-    // successUpload(res){
-    //   this.form.headImageFilePath=res.data;
-    // }
+    edit(id) {
+      request.get("/posts/" + id).then(res => {
+        if (res.code === '0') {
+          this.form = res.data;
+        } else {
+          this.$message({
+          message: res.msg,
+          type: 'success'
+        });
+        }
+      })
+      this.dialogFormVisible = true;
+    }
   }
 }
 </script>

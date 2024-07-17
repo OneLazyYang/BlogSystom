@@ -18,7 +18,7 @@
                 <el-menu :default-active="$route.path" router background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
                     <el-submenu index="1">
                         <template slot="title">
-                        <i class="el-icon-s-home" style="font-size: 24px"></i><span style="font-size: 20px">个人管理</span>
+                            <i class="el-icon-s-home" style="font-size: 24px"></i><span style="font-size: 20px">个人管理</span>
                         </template>
                         <el-menu-item-group>
                         <el-menu-item index="/user" style="font-size: 20px">个人信息</el-menu-item>
@@ -28,6 +28,10 @@
                     <el-menu-item index="/blog">
                         <i class="el-icon-location" style="font-size: 24px"></i>
                         <span slot="title" style="font-size: 20px">浏览博客</span>
+                    </el-menu-item>
+                    <el-menu-item index="/log">
+                        <i class="el-icon-location" style="font-size: 24px"></i>
+                        <span slot="title" style="font-size: 20px">操作日志</span>
                     </el-menu-item>
                 </el-menu>
             </el-aside>

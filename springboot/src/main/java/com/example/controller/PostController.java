@@ -1,5 +1,7 @@
 package com.example.controller;
 
+import cn.hutool.core.date.DateUtil;
+import com.example.common.AutoLog;
 import com.example.common.JwtTokenUtils;
 import com.example.common.Result;
 import com.example.entity.Params;
@@ -11,6 +13,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -32,19 +35,30 @@ public class PostController {
         return Result.success(info);
     }
 
+    @GetMapping("/{id}")
+    public Result findDetails(@PathVariable Integer id){
+        Post post =postService.findDetails(id);
+        return Result.success(post);
+    }
+
     @PostMapping("/submit")
+    @AutoLog("更新个人博客")
     public Result save(@RequestBody Post post){
         if(post.getPost_id()==null){
             User user= JwtTokenUtils.getCurrentUser();
             post.setUser_id(user.getUser_id());
+            post.setCreated(DateUtil.now());
+            post.setLast_modified(DateUtil.now());
             postService.add(post);
         }else{
+            post.setLast_modified(DateUtil.now());
             postService.update(post);
         }
         return Result.success();
     }
 
     @DeleteMapping("/{id}")
+    @AutoLog("删除一条博客")
     public Result delete(@PathVariable Integer id){
         postService.delete(id);
         return Result.success();

@@ -16,7 +16,7 @@
           <template slot-scope="scope">
             <el-button type="primary" @click="edit(scope.row)">编辑</el-button>
             <el-popconfirm title="确定删除吗？" @confirm="del(scope.row.id)">
-              <el-button slot="reference" type="danger" style="margin-left: 5px">删除</el-button>
+                <el-button slot="reference" type="danger" style="margin-left: 5px">删除</el-button>
             </el-popconfirm>
           </template>
         </el-table-column>
@@ -121,7 +121,7 @@ export default {
       this.dialogFormVisible = true;
     },
     del(id){
-      request.delete("/posts/"+id).then(res=>{
+      request.delete("/posts/" + id).then(res=>{
         if(res.code==='0'){
           this.$message({
             message: '删除成功',

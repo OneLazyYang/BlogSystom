@@ -4,8 +4,6 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-//import com.example.entity.Admin;
-//import com.example.service.AdminService;
 import com.example.entity.User;
 import com.example.service.UserService;
 import org.slf4j.Logger;

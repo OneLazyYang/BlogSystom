@@ -12,9 +12,11 @@
                 and user_id =#{params.userid}
             </if>
         </where>
+        order by created desc
     </select>
     <select id="findAll" resultType="com.example.entity.Post">
-        select * from post
+        select post.*,user.username AS username from post
+        left join user on post.user_id=user.user_id
         <where>
             <if test="params!=null and params.title!=null and params.title!=''">
                 and title like concat('%',#{params.title},'%')

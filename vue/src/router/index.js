@@ -6,6 +6,7 @@ import LayoutView from '@/views/Layout.vue'
 import UserView from '@/views/UserView.vue'
 import PostView from '@/views/PostView.vue'
 import BlogView from '@/views/BlogView.vue'
+import LogView from '@/views/LogView.vue'
 
 Vue.use(VueRouter)
 
@@ -39,6 +40,11 @@ const routes = [
         path: '/blog',
         name: 'blog',
         component: BlogView
+      },
+      {
+        path: '/log',
+        name: 'log',
+        component: LogView
       },
     ]
   },
