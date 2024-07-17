@@ -8,10 +8,10 @@ ENV JAVA_OPTS=""
 WORKDIR /app
 
 # 将应用的 JAR 文件复制到容器中
-COPY target/blogsystem.jar /app/blogsystem.jar
+COPY target/springboot-0.0.1-SNAPSHOT.jar /app/springboot-0.0.1-SNAPSHOT.jar
 
 # 暴露应用运行的端口
 EXPOSE 8080
 
 # 定义容器启动时执行的命令
-ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar /app/blogsystem.jar"]
+ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar /app/springboot-0.0.1-SNAPSHOT.jar"]
